@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.push(formData);
 
         // Save back to localStorage
-        localStorage.setItem("formEntries", JSON.stringify(entries));
+        localStorage.setItem("entries", JSON.stringify(entries));
 
         console.log("Data stored in localStorage! Redirecting..."); // Debugging message
 
