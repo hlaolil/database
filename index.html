@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Display</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        button {
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <table id="outputTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <script>
+        function loadTable() {
+            const tableData = JSON.parse(localStorage.getItem('tableData')) || [];
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            tableData.forEach((entry, index) => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${entry.name}</td>
+                    <td>${entry.age}</td>
+                    <td>${entry.city}</td>
+                    <td>
+                        <button onclick="editEntry(${index})">Edit</button>
+                        <button onclick="deleteEntry(${index})">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(newRow);
+            });
+        }
+
+        function deleteEntry(index) {
+            let tableData = JSON.parse(localStorage.getItem('tableData')) || [];
+            tableData.splice(index, 1);
+            localStorage.setItem('tableData', JSON.stringify(tableData));
+            loadTable();
+        }
+
+        function editEntry(index) {
+            let tableData = JSON.parse(localStorage.getItem('tableData')) || [];
+            const entry = tableData[index];
+
+            const newName = prompt("Enter new name:", entry.name);
+            const newAge = prompt("Enter new age:", entry.age);
+            const newCity = prompt("Enter new city:", entry.city);
+
+            if (newName !== null && newAge !== null && newCity !== null) {
+                tableData[index] = {
+                    name: newName || entry.name,
+                    age: newAge || entry.age,
+                    city: newCity || entry.city
+                };
+                localStorage.setItem('tableData', JSON.stringify(tableData));
+                loadTable();
+            }
+        }
+
+        // Load table on page load
+        window.onload = loadTable;
+    </script>
+</body>
+</html>
