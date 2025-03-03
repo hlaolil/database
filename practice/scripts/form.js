@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Collected data:", formData); // Debugging message
 
         // Get existing entries
-        let entries = JSON.parse(localStorage.getItem("formEntries")) || [];
+        let entries = JSON.parse(localStorage.getItem("entries")) || [];
 
         // Add new entry
         entries.push(formData);
