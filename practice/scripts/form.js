@@ -16,13 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         // Get existing entries from localStorage
-        let entries = JSON.parse(localStorage.getItem("formEntries")) || [];
+        let entries = JSON.parse(localStorage.getItem("entries")) || [];
 
         // Append new entry
         entries.push(formData);
 
         // Save updated entries back to localStorage
-        localStorage.setItem("formEntries", JSON.stringify(entries));
+        localStorage.setItem("entries", JSON.stringify(entries));
 
         // Redirect to thank you page
         window.location.href = "thankyou.html";
