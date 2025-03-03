@@ -1,8 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("Script loaded successfully!"); // Debugging message
+
     const form = document.querySelector("form");
+    if (!form) {
+        console.error("Form not found!");
+        return;
+    }
 
     form.addEventListener("submit", (event) => {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); // Stop default form submission
+        console.log("Form submitted!"); // Debugging message
 
         // Collect form data
         const formData = {
@@ -11,18 +18,22 @@ document.addEventListener("DOMContentLoaded", () => {
             email: document.getElementById("email").value,
             phone: document.getElementById("phone").value,
             enquiryType: document.getElementById("membership").value,
-            message: document.getElementById("message").value || "N/A",
+            message: document.getElementById("organization-description").value || "N/A",
             timestamp: new Date().toISOString()
         };
 
-        // Get existing entries from localStorage
-        let entries = JSON.parse(localStorage.getItem("entries")) || [];
+        console.log("Collected data:", formData); // Debugging message
 
-        // Append new entry
+        // Get existing entries
+        let entries = JSON.parse(localStorage.getItem("formEntries")) || [];
+
+        // Add new entry
         entries.push(formData);
 
-        // Save updated entries back to localStorage
-        localStorage.setItem("entries", JSON.stringify(entries));
+        // Save back to localStorage
+        localStorage.setItem("formEntries", JSON.stringify(entries));
+
+        console.log("Data stored in localStorage! Redirecting..."); // Debugging message
 
         // Redirect to thank you page
         window.location.href = "thankyou.html";
