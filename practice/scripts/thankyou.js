@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const submissionDetails = document.getElementById("submission-details");
-    const entries = JSON.parse(localStorage.getItem("formEntries")) || [];
+    const entries = JSON.parse(localStorage.getItem("entries")) || [];
 
     if (entries.length > 0) {
         submissionDetails.innerHTML = entries.map((entry, index) => `
